@@ -4,6 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Face
@@ -22,7 +24,7 @@ import com.github.crayonxiaoxin.composematerial3.Pages
 @Composable
 fun PageHome(navController: NavHostController, onThemeChange: () -> Unit = {}) {
     Surface(
-        modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
+        modifier = Modifier.fillMaxSize()
     ) {
         // Modifier.systemBarsPadding() 状态栏 + 虚拟导航
         Column(
@@ -62,6 +64,8 @@ fun PageHome(navController: NavHostController, onThemeChange: () -> Unit = {}) {
             // 正文
             Box(Modifier.fillMaxSize()) {
                 Column(Modifier.fillMaxWidth()) {
+                    Spacer(modifier = Modifier.height(4.dp))
+
                     HomeItem("1. 返回拦截") {
                         navController.navigate(Pages.BackHandler)
                     }
@@ -74,26 +78,30 @@ fun PageHome(navController: NavHostController, onThemeChange: () -> Unit = {}) {
                     HomeItem("4. 使用 Hilt 实现依赖注入") {
                         navController.navigate(Pages.HiltUsage)
                     }
+                    HomeItem("5. LargeTopAppBar") {
+                        navController.navigate(Pages.LargeAppBar)
+                    }
                 }
             }
         }
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HomeItem(text: String, showSep: Boolean = true, onClick: () -> Unit = {}) {
-    Text(text = text, modifier = Modifier
-        .clickable {
-            onClick()
-        }
-        .padding(16.dp)
-        .fillMaxWidth())
-    if (showSep) {
-        Spacer(
+fun HomeItem(text: String, onClick: () -> Unit = {}) {
+    Card(
+        onClick = { onClick() },
+        backgroundColor = MaterialTheme.colorScheme.background,
+        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+        elevation = 2.dp
+    ) {
+        Text(
+            text = text,
+            color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier
+                .padding(16.dp)
                 .fillMaxWidth()
-                .height(1.dp)
-                .background(Color(0xFFEEEEEE))
         )
     }
 }

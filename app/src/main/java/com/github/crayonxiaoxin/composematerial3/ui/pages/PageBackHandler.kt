@@ -51,16 +51,23 @@ fun PageBackHandler(back: () -> Unit = {}) {
         )
     }
 
-    SimplePage(title = "返回拦截", back = { showBackDialog.value = true }) {
+    SimplePage(
+        title = "返回拦截",
+        back = {
+            // 点击 TopAppBar 返回图标时，弹出 dialog
+            showBackDialog.value = true
+        }
+    ) {
         Box(Modifier.fillMaxSize()) {
             LazyColumn(Modifier.fillMaxWidth()) {
                 for (i in 1..20) {
                     item {
                         Text(
-                            text = "Hello Jetpack Compose $i!",
+                            text = "拦截系统返回键及顶部返回图标 $i!",
                             modifier = Modifier
                                 .clickable { }
                                 .padding(16.dp)
+                                .fillMaxWidth()
                         )
                     }
                 }
