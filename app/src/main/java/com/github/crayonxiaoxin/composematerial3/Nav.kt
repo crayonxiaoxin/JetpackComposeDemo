@@ -17,6 +17,7 @@ object Pages {
     const val LocalDensity = "local-density"
     const val HiltUsage = "hilt-usage"
     const val LargeAppBar = "large-app-bar"
+    const val ClickRipple = "click-ripple"
 }
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -66,6 +67,9 @@ fun AnimatedNav(
         }
         composable(Pages.LargeAppBar) {
             PageCollapseTopBar(back = { navController.popBackStack() })
+        }
+        composable(Pages.ClickRipple) {
+            PageClickRipple(back = { navController.popBackStack() })
         }
     }
 }

@@ -81,6 +81,9 @@ fun PageHome(navController: NavHostController, onThemeChange: () -> Unit = {}) {
                     HomeItem("5. LargeTopAppBar") {
                         navController.navigate(Pages.LargeAppBar)
                     }
+                    HomeItem("6. 取消 Text 点击效果") {
+                        navController.navigate(Pages.ClickRipple)
+                    }
                 }
             }
         }
